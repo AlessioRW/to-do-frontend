@@ -2,6 +2,10 @@ import styled from "styled-components";
 import {useTodosState} from "../store";
 
 
+function deleteTodo(id) {
+  fetch(`http://localhost:5001/toDo/${id}`, { method: "DELETE" });
+}
+
 export function Reminder({ id, title, description, status }) {
   const [todos, setTodos] = useTodosState();
 
@@ -13,6 +17,7 @@ export function Reminder({ id, title, description, status }) {
         const newTodos = todos.map(a => ({...a}));
         newTodos.splice(newTodos.indexOf(newTodos.find(todo => todo.id === id)), 1)
         setTodos(newTodos);
+        deleteTodo(id);
       }}>X</DeleteButton>
       </CardHeader>
       <p>{description}</p>
