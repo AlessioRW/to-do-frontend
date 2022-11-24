@@ -1,18 +1,18 @@
 import styled from "styled-components";
-import {useEffect, useState} from "react";
+import React, {useEffect} from "react";
+import {useTodosState} from "../store";
 import {Reminder} from "./Reminder";
 
 export function ToDos() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useTodosState();
   useEffect(() => {
     fetch(`http://localhost:5001/toDo/`)
       .then((res) => res.json())
       .then((data) => setTodos(data));
-  }, []);
-  console.log(todos);
+  }, [setTodos]);
   return (
     <Main>
-      {todos.map(({ id, title }) => <Reminder key={id} title={title} />)}
+      {todos.map(({ id, title }) => <Reminder key={id} id={id} title={title} />)}
     </Main>
   );
 }

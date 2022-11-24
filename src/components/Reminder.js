@@ -1,9 +1,16 @@
 import styled from "styled-components";
+import {useTodosState} from "../store";
 
-export function Reminder({ title }) {
+export function Reminder({ id, title }) {
+  const [todos, setTodos] = useTodosState();
   return (
     <Section>
-      <h2>{title}</h2><DeleteButton>X</DeleteButton>
+      <h2>{title}</h2>
+      <DeleteButton onClick={() => {
+        const newTodos = todos.map(a => ({...a}));
+        newTodos.splice(newTodos.indexOf(newTodos.find(todo => todo.id === id)), 1)
+        setTodos(newTodos);
+      }}>X</DeleteButton>
     </Section>
   )
 }
