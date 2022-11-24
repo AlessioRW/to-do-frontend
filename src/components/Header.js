@@ -14,7 +14,7 @@ const PageHeader = styled.header`
 `
 
 const HeaderOne = styled.h1`
-  background-color: grey;
+  background-color: #26272a;
   border-radius: 10px;
   padding: 10px;
 `
