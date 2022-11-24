@@ -1,3 +1,20 @@
+import styled from "styled-components";
+
 export function Header() {
-  return <h1>Test</h1>;
+  return (
+    <PageHeader>
+      <HeaderOne>To-Do List</HeaderOne>
+    </PageHeader>
+  );
 }
+
+const PageHeader = styled.header`
+  display: flex;
+  justify-content: center;
+`
+
+const HeaderOne = styled.h1`
+  background-color: grey;
+  border-radius: 10px;
+  padding: 10px;
+`
