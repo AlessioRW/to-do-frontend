@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './pages/App';
 import './index.css';
-import {NewReminder} from "./pages/NewReminder";
+import {NewListItem} from "./pages/NewReminder";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/new",
-    element: <NewReminder />,
+    element: <NewListItem />,
   }
 ]);
 
