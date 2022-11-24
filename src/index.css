@@ -2,3 +2,20 @@ body {
     color: #748bdc;
     background-color: #2e3136;
 }
+
+@media (max-width: 480px){
+
+    #main{
+        grid-template-columns: 1fr;
+    }
+}
+@media (min-width: 481px) and (max-width:1024px){
+    #main{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media((min-width: 1025px)){
+    #main{
+        grid-template-columns: 1fr 1fr 1fr;
+    }  
+}      

@@ -11,14 +11,33 @@ export function ToDos() {
       .then((data) => setTodos(data));
   }, [setTodos]);
   return (
-    <Main>
-      {todos.map(({ id, title }) => <Reminder key={id} id={id} title={title} />)}
+    <Main id='main'>
+      <IncompleteTitle>Incomplete</IncompleteTitle>
+      <WorkingTitle>Working-On</WorkingTitle>
+      <CompleteTitle>Complete</CompleteTitle>
+      {todos.map(({ id, title, description, status }) => <Reminder key={id} id={id} title={title} description={description} status={status}/>)}
     </Main>
   );
 }
 
 const Main = styled.main`
-  display: flex;
-  align-items: center;
-  flex-flow: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  /* align-items: center;
+  flex-flow: column; */
+`
+
+const IncompleteTitle = styled.h2`
+  grid-column: 1/2;
+  text-align: center;
+`
+
+const WorkingTitle = styled.h2`
+  grid-column: 2/3;
+  text-align: center;
+`
+
+const CompleteTitle = styled.h2`
+  grid-column: 3/4;
+  text-align: center;
 `
