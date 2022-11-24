@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './pages/App';
 import './index.css';
-import {NewListItem} from "./pages/NewReminder";
+import {NewListItem} from "./pages/NewListItem";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
 const router = createBrowserRouter([
