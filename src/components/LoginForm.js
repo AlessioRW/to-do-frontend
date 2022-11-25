@@ -1,4 +1,5 @@
 import {Button, Form, FormContainer, InputContainer, Label, TextInput} from "../style";
+import {useNavigate} from "react-router-dom";
 
 async function sendReq(event) {
   event.preventDefault();
@@ -20,13 +21,21 @@ async function sendReq(event) {
     const data = await response.json();
     localStorage.setItem("token", data.token);
     form.reset();
+    return true;
   }
+  return false;
 }
 
 export function LoginForm() {
+  const navigate = useNavigate();
   return (
     <FormContainer>
-      <Form id="form" onSubmit={async (event) => await sendReq(event)}>
+      <Form id="form" onSubmit={async (event) => {
+        const response = await sendReq(event);
+        if (response) {
+          navigate("/");
+        }
+      }}>
         <InputContainer>
           <Label htmlFor="email">Email</Label>
           <TextInput type="text" name="email" />
