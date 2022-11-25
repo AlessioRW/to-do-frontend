@@ -1,4 +1,4 @@
-import {Button, Form, FormContainer, InputContainer, TextInput} from "../style";
+import {Button, Form, FormContainer, InputContainer, Label, TextInput} from "../style";
 
 async function sendReq(event){
     event.preventDefault();
@@ -27,8 +27,10 @@ export function AddItem() {
         <FormContainer>
             <Form id="form" onSubmit={async (event) => await sendReq(event)}>
                 <InputContainer>
-                    <TextInput name="title" placeholder="Title"></TextInput>
-                    <TextInput name="description" placeholder="Description"></TextInput>
+                    <Label htmlFor="title">Title</Label>
+                    <TextInput name="title"></TextInput>
+                    <Label htmlFor="description">Description</Label>
+                    <TextInput name="description"></TextInput>
                     <Button type="submit">Submit</Button>
                 </InputContainer>
             </Form>
