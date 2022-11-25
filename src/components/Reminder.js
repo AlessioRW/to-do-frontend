@@ -6,24 +6,45 @@ async function deleteTodo(id) {
   return response.status === 200;
 }
 
-export function Reminder({ id, title, description, status }) {
+async function updateImportance(id, newImportance) {
+  const response = await fetch(`http://localhost:5001/toDo/important/${id}/${newImportance}`, { method: "PUT"});
+  return response.status === 200;
+}
+
+export function Reminder({ id, title, description, status, important}) {
   const [todos, setTodos] = useTodosState();
 
   const content = (
-  <Section>
+  <Section important={important}>
     <CardHeader>
       <StyledH2>{title}</StyledH2>
-      <DeleteButton onClick={async () => {
-        const response = await deleteTodo(id);
-        if (response) {
-          const newTodos = todos.map(item => ({...item})); // Deep clone array into copy
-          newTodos.splice(newTodos.indexOf(newTodos.find(todo => todo.id === id)), 1) // Remove reminder from array using its ID
-          setTodos(newTodos);
+      <ButtonsDiv>
+        <DeleteButton onClick={async () => {
+          const response = await deleteTodo(id);
+          if (response) {
+            const newTodos = todos.map(item => ({...item})); // Deep clone array into copy
+            newTodos.splice(newTodos.indexOf(newTodos.find(todo => todo.id === id)), 1) // Remove reminder from array using its ID
+            setTodos(newTodos);
         }
-      }}>X</DeleteButton>
+        }}>X</DeleteButton>
+
+        <ImportanceButton 
+         onClick={async () => {
+
+          const newImportance = (important === 0) ? 1 : 0
+          console.log(important,newImportance)
+
+          const response = await updateImportance(id, newImportance)
+          console.log(response)
+        }}
+
+        >I</ImportanceButton>
+      </ButtonsDiv>
     </CardHeader>
     <p>{description}</p>
   </Section>)
+
+  
   if (status === 1){
     return (
       <IncompleteSection>
@@ -31,14 +52,14 @@ export function Reminder({ id, title, description, status }) {
       </IncompleteSection>
     )
   }
-  if (status === 2){
+  else if (status === 2){
     return (
       <WorkingSection>
         {content}
       </WorkingSection>
     )
   }
-  if (status === 3){
+  else{ //status=== 3
     return (
       <CompleteSection>
         {content}
@@ -65,6 +86,12 @@ const Section = styled.section`
   border-radius: 10px;
   padding: 10px;
   width: 30vw;
+  margin: 2px;
+  outline-color: red;
+
+  outline-style: ${props => 
+    (props.important !== 1) ? 'none': 'solid'
+  };
 `
 
 
@@ -72,7 +99,7 @@ const DeleteButton = styled.button`
   background-color: red;
   border: none;
   border-radius: 10px;
-  height: 25%;
+  height: 50%;
   width: 70%;
   margin: 5px;
   cursor: pointer;
@@ -86,3 +113,19 @@ const CardHeader = styled.div`
 const StyledH2 = styled.h2`
   text-align: center;
 `
+
+const ButtonsDiv = styled.div`
+  display: grid; 
+  grid-template-rows: 1fr 1fr;
+  
+`
+const ImportanceButton = styled.button`
+  background-color: grey;
+  border: none;
+  border-radius: 10px;
+  height: 50%;
+  width: 70%;
+  margin: 5px;
+  cursor: pointer;
+`
+

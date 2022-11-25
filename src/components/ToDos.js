@@ -15,7 +15,7 @@ export function ToDos() {
       <IncompleteTitle>Incomplete</IncompleteTitle>
       <WorkingTitle>Working-On</WorkingTitle>
       <CompleteTitle>Complete</CompleteTitle>
-      {todos.map(({ id, title, description, status }) => <Reminder key={id} id={id} title={title} description={description} status={status}/>)}
+      {todos.map(({ id, title, description, status, important }) => <Reminder key={id} id={id} title={title} description={description} status={status} important={important}/>)}
     </Main>
   );
 }
