@@ -12,7 +12,7 @@ export function Reminder({ id, title, description, status }) {
   const content = (
   <Section>
     <CardHeader>
-      <h2>{title}</h2>
+      <StyledH2>{title}</StyledH2>
       <DeleteButton onClick={async () => {
         const response = await deleteTodo(id);
         if (response) {
@@ -64,7 +64,7 @@ const Section = styled.section`
   background-color: #26272a;
   border-radius: 10px;
   padding: 10px;
-  margin: 5px;
+  width: 30vw;
 `
 
 
@@ -81,4 +81,8 @@ const DeleteButton = styled.button`
 const CardHeader = styled.div`
   display: grid;
   grid-template-columns: 90% 1fr;
+  width: 100%;
+`
+const StyledH2 = styled.h2`
+  text-align: center;
 `
