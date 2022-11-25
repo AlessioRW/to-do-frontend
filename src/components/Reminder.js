@@ -48,16 +48,18 @@ export function Reminder({ id, title, description, status, important}) {
         }
         }}>X</DeleteButton>
 
-        <ImportanceButton 
-         onClick={async () => {
-
-          const newImportance = (important === 0) ? 1 : 0
+        <ImportanceButton onClick={async () => {
+          const newImportance = (important === 0) ? 1 : 0;
           const response = await updateImportance(id, newImportance)
           if (response){
-            window.location.reload(false);
+            const newTodos = todos.map(item => ({...item})); // Deep clone array into copy
+            const findTodo = newTodos.find(todo => todo.id === id);
+            if (findTodo != null) {
+              findTodo.important = newImportance;
+            }
+            setTodos(newTodos);
           }
         }}
-
         >I</ImportanceButton>
       </ButtonsDiv>
 
