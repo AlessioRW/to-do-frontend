@@ -1,31 +1,33 @@
 import styled from "styled-components"
 
-function createNew(){
-    fetch('http://localhost:5001/toDo/', {
-        headers: {
-            'Content-Type': 'application/json'
-        },
+async function sendReq(event){
+    event.preventDefault();
+    const form = document.getElementById("form");
+    const formData = new FormData(form);
+
+    const title = formData.get("title");
+    const description = formData.get("description");
+
+    await fetch("http://localhost:5001/reminders/new", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            title: document.getElementById('title-input').value,
-            description: document.getElementById('desc-input').value
+            token: localStorage.getItem("token"),
+            title,
+            description
         }),
-        method:'POST'
-    }).then((res) => res.json()).then((data) => console.log(data.status))
+    });
 }
 
 export function AddItem() {
     return (
-        <>
-            <StyledForm>
-                <StyledInput id='title-input' placeholder="Title"></StyledInput>
-                <StyledTextarea id='desc-input' placeholder="Description"></StyledTextarea>
-                <StyledButton onClick={createNew}>Create New Item</StyledButton>
-            </StyledForm>
-        </>
+        <StyledForm id="form" onSubmit={async (event) => await sendReq(event)}>
+            <StyledInput name="title" placeholder="Title"></StyledInput>
+            <StyledTextarea name="description" placeholder="Description"></StyledTextarea>
+            <StyledButton type="submit">Submit</StyledButton>
+        </StyledForm>
     )
 }
-
-
 
 const StyledForm = styled.form`
     display: flex;
