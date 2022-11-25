@@ -32,10 +32,10 @@ export function Reminder({ id, title, description, status, important}) {
          onClick={async () => {
 
           const newImportance = (important === 0) ? 1 : 0
-          console.log(important,newImportance)
-
           const response = await updateImportance(id, newImportance)
-          console.log(response)
+          if (response){
+            window.location.reload(false);
+          }
         }}
 
         >I</ImportanceButton>
