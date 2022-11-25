@@ -2,13 +2,23 @@ import styled from "styled-components";
 import React, {useEffect} from "react";
 import {useTodosState} from "../store";
 import {Reminder} from "./Reminder";
+import {useNavigate} from "react-router-dom";
 
 export function ToDos() {
+  const navigate = useNavigate();
   const [todos, setTodos] = useTodosState();
   useEffect(() => {
-    fetch(`http://localhost:5001/toDo/`)
+    fetch(`http://localhost:5001/reminders/get`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token: localStorage.getItem("token")
+      })
+    })
       .then((res) => res.json())
-      .then((data) => setTodos(data));
+      .then((data) => {
+        setTodos(data)
+      }).catch(_err => navigate("/login"));
   }, [setTodos]);
   return (
     <Main id='main'>
