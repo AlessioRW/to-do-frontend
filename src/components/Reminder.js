@@ -24,6 +24,12 @@ export function Reminder({ id, title, description, status, important}) {
   const content = (
   <Section important={important}>
     <CardHeader>
+      <StatusButtons>
+        <IncompleteButton></IncompleteButton>
+        <WorkingButton></WorkingButton>
+        <CompleteButton></CompleteButton>
+        
+      </StatusButtons>
       <StyledH2>{title}</StyledH2>
       <ButtonsDiv>
         <DeleteButton onClick={async () => {
@@ -47,6 +53,8 @@ export function Reminder({ id, title, description, status, important}) {
 
         >I</ImportanceButton>
       </ButtonsDiv>
+
+      
     </CardHeader>
     <p>{description}</p>
   </Section>)
@@ -85,6 +93,7 @@ const WorkingSection = styled.section`
 const CompleteSection = styled.section`
   grid-column: 3/4;
 `
+
 const Section = styled.section`
   display: flex;
   flex-direction: column;
@@ -106,7 +115,7 @@ const DeleteButton = styled.button`
   background-color: red;
   border: none;
   border-radius: 10px;
-  height: 50%;
+  height: 60%;
   width: 70%;
   margin: 5px;
   cursor: pointer;
@@ -114,7 +123,7 @@ const DeleteButton = styled.button`
 
 const CardHeader = styled.div`
   display: grid;
-  grid-template-columns: 90% 1fr;
+  grid-template-columns: 1fr 80% 1fr;
   width: 100%;
 `
 const StyledH2 = styled.h2`
@@ -123,16 +132,49 @@ const StyledH2 = styled.h2`
 
 const ButtonsDiv = styled.div`
   display: grid; 
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 2fr;
   
 `
 const ImportanceButton = styled.button`
   background-color: grey;
   border: none;
-  border-radius: 10px;
-  height: 50%;
+  border-radius:10px;
+  height: 30%;
+  width: 70%;
+  margin: 5px;
+  margin-top: 0px;
+  cursor: pointer;
+`
+const WorkingButton = styled.button`
+  background-color: orange;
+  border: none;
+  border-radius:5px;
+  height: 70%;
   width: 70%;
   margin: 5px;
   cursor: pointer;
 `
 
+const CompleteButton = styled.button`
+  background-color: green;
+  border: none;
+  border-radius:5px;
+  height: 70%;
+  width: 70%;
+  margin: 5px;
+  cursor: pointer;
+`
+const IncompleteButton = styled.button`
+  background-color: red;
+  border: none;
+  border-radius:5px;
+  height: 70%;
+  width: 70%;
+  margin: 5px;
+  cursor: pointer;
+`
+
+const StatusButtons = styled.div`
+ display: grid;
+ grid-template-rows: 1fr 1fr 1fr;
+`
