@@ -6,7 +6,7 @@ import {SharedStateProvider} from "../store";
 function App() {
   return (
     <>
-      <Header />
+      <Header showButton={true} />
       <SharedStateProvider>
         <ToDos />
       </SharedStateProvider>
