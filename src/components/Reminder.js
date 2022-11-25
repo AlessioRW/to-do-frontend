@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import {useTodosState} from "../store";
 
-
-function deleteTodo(id) {
-  fetch(`http://localhost:5001/toDo/${id}`, { method: "DELETE" });
+async function deleteTodo(id) {
+  const response = await fetch(`http://localhost:5001/toDo/${id}`, { method: "DELETE" });
+  return response.status === 200;
 }
 
 export function Reminder({ id, title, description, status }) {
@@ -13,15 +13,17 @@ export function Reminder({ id, title, description, status }) {
   <Section>
     <CardHeader>
       <h2>{title}</h2>
-      <DeleteButton onClick={() => {
-        const newTodos = todos.map(a => ({...a}));
-        newTodos.splice(newTodos.indexOf(newTodos.find(todo => todo.id === id)), 1)
-        setTodos(newTodos);
-        deleteTodo(id);
+      <DeleteButton onClick={async () => {
+        const response = await deleteTodo(id);
+        if (response) {
+          const newTodos = todos.map(item => ({...item})); // Deep clone array into copy
+          newTodos.splice(newTodos.indexOf(newTodos.find(todo => todo.id === id)), 1) // Remove reminder from array using its ID
+          setTodos(newTodos);
+        }
       }}>X</DeleteButton>
-      </CardHeader>
-      <p>{description}</p>
-    </Section>)
+    </CardHeader>
+    <p>{description}</p>
+  </Section>)
   if (status === 1){
     return (
       <IncompleteSection>
