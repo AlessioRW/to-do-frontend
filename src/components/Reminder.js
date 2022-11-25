@@ -25,16 +25,57 @@ async function updateImportance(id, newImportance) {
   return response.status === 200;
 }
 
+async function updateStatus(id, newStatus){
+  const response = await fetch(`http://localhost:5001/reminders/status/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      newStatus: newStatus
+    })
+  })
+  return response.status === 200
+}
+
 export function Reminder({ id, title, description, status, important}) {
   const [todos, setTodos] = useTodosState();
 
   const content = (
-  <Section important={important}>
+  <Section important={important}> 
     <CardHeader>
       <StatusButtons>
-        <IncompleteButton></IncompleteButton>
-        <WorkingButton></WorkingButton>
-        <CompleteButton></CompleteButton>
+        <IncompleteButton onClick={async() => {
+          const response = await updateStatus(id,1)
+          if (response){
+            const newTodos = todos.map(item => ({...item})); // Deep clone array into copy
+            //const findTodo = newTodos.find(todo => todo.id === id);
+            // if (findTodo != null) {
+            //   findTodo.important = newImportance;
+            // }
+            setTodos(newTodos);
+        }}}>
+        </IncompleteButton >
+        <WorkingButton onClick={async() => {
+          const response = await updateStatus(id,2)
+          if (response){
+            const newTodos = todos.map(item => ({...item})); // Deep clone array into copy
+            //const findTodo = newTodos.find(todo => todo.id === id);
+            // if (findTodo != null) {
+            //   findTodo.important = newImportance;
+            // }
+            setTodos(newTodos);
+        }}}>
+        </WorkingButton >
+        <CompleteButton onClick={async() => {
+          const response = await updateStatus(id,3)
+          if (response){
+            const newTodos = todos.map(item => ({...item})); // Deep clone array into copy
+            //const findTodo = newTodos.find(todo => todo.id === id);
+            // if (findTodo != null) {
+            //   findTodo.important = newImportance;
+            // }
+            setTodos(newTodos);
+
+        }}}></CompleteButton>
         
       </StatusButtons>
       <StyledH2>{title}</StyledH2>
@@ -94,9 +135,11 @@ export function Reminder({ id, title, description, status, important}) {
 
 const IncompleteSection = styled.section`
   grid-column: 1/2;
+  grid-row: auto;
 `
 const WorkingSection = styled.section`
   grid-column: 2/3;
+  grid-row: auto;
 `
 
 const CompleteSection = styled.section`
