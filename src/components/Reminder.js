@@ -14,7 +14,14 @@ async function deleteTodo(id) {
 }
 
 async function updateImportance(id, newImportance) {
-  const response = await fetch(`http://localhost:5001/reminders/important/${id}/${newImportance}`, { method: "PUT"});
+  const response = await fetch(`http://localhost:5001/reminders/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      token: localStorage.getItem("token"),
+      important: newImportance,
+    }),
+  });
   return response.status === 200;
 }
 
