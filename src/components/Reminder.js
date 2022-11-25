@@ -135,11 +135,9 @@ export function Reminder({ id, title, description, status, important}) {
 
 const IncompleteSection = styled.section`
   grid-column: 1/2;
-  grid-row: auto;
 `
 const WorkingSection = styled.section`
   grid-column: 2/3;
-  grid-row: auto;
 `
 
 const CompleteSection = styled.section`
