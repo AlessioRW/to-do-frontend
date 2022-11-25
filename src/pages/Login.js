@@ -26,7 +26,7 @@ export function Login() {
   return (
     <>
       <Header />
-      <form id="form" onSubmit={(event) => sendReq(event)}>
+      <form id="form" onSubmit={async (event) => await sendReq(event)}>
         <input type="text" name="email" />
         <input type="password" name="password" />
         <button type="submit">Submit</button>
