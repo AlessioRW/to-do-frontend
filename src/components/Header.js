@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export function Header({ showButton }) {
-  const headers = [<HeaderOne>To-Do List</HeaderOne>];
+  const headers = [<HeaderOne key="text">To-Do List</HeaderOne>];
   if (showButton) {
-    headers.push(<a href="/new"><NewReminder>New Reminder</NewReminder></a>);
+    headers.push(<a key="button" href="/new"><NewReminder>New Reminder</NewReminder></a>);
   }
   return (
     <PageHeader>
