@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import {Button, Form, FormContainer, InputContainer, Label, TextInput} from "../style";
 
 async function sendReq(event) {
   event.preventDefault();
@@ -38,45 +38,3 @@ export function LoginForm() {
     </FormContainer>
   )
 }
-
-const FormContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`
-
-const Form = styled.form`
-  background-color: #26272a;
-  border-radius: 15px;
-  padding: 20px;
-  width: 25%;
-`
-
-const InputContainer = styled.div`
-  display: flex;
-  align-items: center;
-  flex-flow: column;
-`;
-
-const Label = styled.label`
-  margin: 5px;
-`
-
-const TextInput = styled.input`
-  color: white;
-  background-color: #2e3136;
-  border-radius: 10px;
-  border: none;
-  padding: 10px;
-  margin: 5px;
-  width: 75%;
-`
-
-const Button = styled.button`
-  color: white;
-  background-color: #2e3136;
-  border-radius: 10px;
-  border: none;
-  padding: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-`;

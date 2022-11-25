@@ -15,11 +15,17 @@ export function ToDos() {
         token: localStorage.getItem("token")
       })
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 404) {
+          navigate("/login");
+          return;
+        }
+        return res.json();
+      })
       .then((data) => {
         setTodos(data)
-      }).catch(_err => navigate("/login"));
-  }, [setTodos]);
+      });
+  }, [navigate, setTodos]);
   return (
     <Main id='main'>
       <IncompleteTitle>Incomplete</IncompleteTitle>
