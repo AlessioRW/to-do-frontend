@@ -47,10 +47,10 @@ export function Reminder({ id, title, description, status, important}) {
           const response = await updateStatus(id,1)
           if (response){
             const newTodos = todos.map(item => ({...item})); // Deep clone array into copy
-            //const findTodo = newTodos.find(todo => todo.id === id);
-            // if (findTodo != null) {
-            //   findTodo.important = newImportance;
-            // }
+            const findTodo = newTodos.find(todo => todo.id === id);
+            if (findTodo != null) {
+              findTodo.status = 1;
+            }
             setTodos(newTodos);
         }}}>
         </IncompleteButton >
@@ -58,10 +58,10 @@ export function Reminder({ id, title, description, status, important}) {
           const response = await updateStatus(id,2)
           if (response){
             const newTodos = todos.map(item => ({...item})); // Deep clone array into copy
-            //const findTodo = newTodos.find(todo => todo.id === id);
-            // if (findTodo != null) {
-            //   findTodo.important = newImportance;
-            // }
+            const findTodo = newTodos.find(todo => todo.id === id);
+            if (findTodo != null) {
+              findTodo.status = 2;
+            }
             setTodos(newTodos);
         }}}>
         </WorkingButton >
@@ -69,10 +69,10 @@ export function Reminder({ id, title, description, status, important}) {
           const response = await updateStatus(id,3)
           if (response){
             const newTodos = todos.map(item => ({...item})); // Deep clone array into copy
-            //const findTodo = newTodos.find(todo => todo.id === id);
-            // if (findTodo != null) {
-            //   findTodo.important = newImportance;
-            // }
+            const findTodo = newTodos.find(todo => todo.id === id);
+            if (findTodo != null) {
+              findTodo.status = 3;
+            }
             setTodos(newTodos);
 
         }}}></CompleteButton>
