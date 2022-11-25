@@ -4,6 +4,7 @@ import App from './pages/App';
 import './index.css';
 import {NewListItem} from "./pages/NewListItem";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {Login} from "./pages/Login";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: "/new",
     element: <NewListItem />,
+  },
+  {
+    path: "/login",
+    element: <Login />
   }
 ]);
 

@@ -2,7 +2,14 @@ import styled from "styled-components";
 import {useTodosState} from "../store";
 
 async function deleteTodo(id) {
-  const response = await fetch(`http://localhost:5001/toDo/${id}`, { method: "DELETE" });
+  const response = await fetch(`http://localhost:5001/reminders/${id}`,
+    {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token: localStorage.getItem("token")
+      })
+    });
   return response.status === 200;
 }
 

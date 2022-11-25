@@ -6,7 +6,13 @@ import {Reminder} from "./Reminder";
 export function ToDos() {
   const [todos, setTodos] = useTodosState();
   useEffect(() => {
-    fetch(`http://localhost:5001/toDo/`)
+    fetch(`http://localhost:5001/reminders/get`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token: localStorage.getItem("token")
+      })
+    })
       .then((res) => res.json())
       .then((data) => setTodos(data));
   }, [setTodos]);
