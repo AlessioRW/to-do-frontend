@@ -1,4 +1,5 @@
 import {Button, Form, FormContainer, InputContainer, Label, TextInput} from "../style";
+import {useNavigate} from "react-router-dom";
 
 async function sendReq(event){
     event.preventDefault();
@@ -19,13 +20,21 @@ async function sendReq(event){
     });
     if (response.status === 201) {
         form.reset();
+        return true;
     }
+    return false;
 }
 
 export function AddItem() {
+    const navigate = useNavigate();
     return (
         <FormContainer>
-            <Form id="form" onSubmit={async (event) => await sendReq(event)}>
+            <Form id="form" onSubmit={async (event) => {
+                const response = await sendReq(event);
+                if (response) {
+                    navigate("/");
+                }
+            }}>
                 <InputContainer>
                     <Label htmlFor="title">Title</Label>
                     <TextInput name="title"></TextInput>
